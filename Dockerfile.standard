@@ -1,2 +1,2 @@
 FROM sorenisanerd/ubuntu:minimal
-RUN apt-get update && apt-get -y install ubuntu-standard
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install ubuntu-standard
