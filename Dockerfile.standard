@@ -1,0 +1,2 @@
+FROM sorenisanerd/ubuntu:minimal
+RUN apt-get update && apt-get -y install ubuntu-standard
