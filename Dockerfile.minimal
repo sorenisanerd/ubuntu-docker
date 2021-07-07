@@ -1,8 +1,10 @@
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y debootstrap
-RUN debootstrap --extra-suites=focal-updates,focal-security focal chroot
+RUN debootstrap focal chroot
 COPY sources.list chroot/etc/apt/sources.list
+RUN chroot /chroot bash -c 'apt-get update ; DEBIAN_FRONTEND=none apt-get -y dist-upgrade'
+RUN chroot /chroot apt-get clean
 
 FROM scratch
 COPY --from=0 chroot /
