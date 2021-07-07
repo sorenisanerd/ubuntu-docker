@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y debootstrap
-RUN debootstrap focal chroot
+RUN debootstrap --extra-suites=focal-updates,focal-security focal chroot
 COPY sources.list chroot/etc/apt/sources.list
 
 FROM scratch
