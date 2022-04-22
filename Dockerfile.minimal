@@ -1,8 +1,11 @@
-FROM ubuntu:latest
+ARG codename=jammy
+FROM ubuntu:${codename}
 
+ARG codename=jammy
 RUN apt-get update && apt-get install -y debootstrap
-RUN debootstrap focal chroot
+RUN debootstrap $codename chroot
 COPY sources.list chroot/etc/apt/sources.list
+RUN sed -e s/%CODENAME%/$codename/g -i chroot/etc/apt/sources.list
 RUN chroot /chroot bash -c 'apt-get update ; DEBIAN_FRONTEND=none apt-get -y dist-upgrade'
 RUN chroot /chroot apt-get clean
 
